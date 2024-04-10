@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{ recipes[1] }}
+{% endblock %}
+
+{% block content %}
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4">{{ recipes[1] }}</h1>
+        <p class="text-lg text-gray-600 mb-2">Author: {{ recipes[2] }}</p>
+        <p class="text-lg text-gray-600 mb-4">Time: {{ recipes[4] }} mins</p>
+
+        {% if recipes[5] %}
+        <div class="w-64 h-64 overflow-hidden">
+            <img src="../{{ recipes[5] }}" alt="Recipe Image" class="object-cover w-full h-full mb-4 rounded-lg shadow-lg">
+        </div>
+        {% else %}
+            <p class="text-lg text-gray-600 mb-4">No image available</p>
+        {% endif %}
+
+        <h2 class="text-2xl font-semibold mb-2">Ingredients</h2>
+        <ul class="list-disc ml-6 mb-4">
+            {% for ingredient in ingredients %}
+                <li class="text-lg text-gray-800">{{ ingredient[3] }} {{ ingredient[4] | lower }}  {{ ingredient[2] }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="text-2xl font-semibold mb-2">Instructions</h2>
+        <ol class="list-decimal ml-6 mb-4">
+            {% for instruction in instructions %}
+                <li class="text-lg text-gray-800">{{ instruction[3] }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
+

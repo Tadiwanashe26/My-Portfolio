@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Submit Recipe
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <div id="flash-messages" class="space-y-2">
+    {% for category, message in messages %}
+      <div class="{% if category == 'success' %}bg-green-100 border-green-400 text-center text-green-700{% endif %}
+                  {% if category == 'error' %}bg-red-100 border-red-400 text-center text-red-700{% endif %}
+                  p-4 border-2 rounded-lg">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+<div class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-8">Submit Recipe</h1>
+    <form id="submitForm" enctype="multipart/form-data" method="POST" action="/submit_recipe" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="return validateForm()">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-4">
+            <label for="recipe_name" class="block text-gray-700 text-sm font-bold mb-2">Recipe Name:</label>
+            <input type="text" id="recipe_name" name="recipe_name" class="w-full md:w-1/2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
+            <input type="text" id="author" name="author" class="w-full md:w-1/2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="time" class="block text-gray-700 text-sm font-bold mb-2">Time (MIN):</label>
+            <input type="text" id="time" name="time" class="w-full md:w-1/2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image</label>
+            <input type="file" name="image" id="image" accept="image/*">
+        </div>
+        <h2 class="text-xl font-bold mb-4">Ingredients:</h2>
+        <div id="ingredientsContainer" class="mb-4">
+            <div class="flex mb-2">
+                <input type="text" name="ingredients[]" placeholder="Ingredient" class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                <input type="text" name="quantities[]" placeholder="Quantity" class="shadow appearance-none border rounded w-1/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                <input type="text" name="units[]" placeholder="Unit" class="shadow appearance-none border rounded w-1/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+        </div>
+        <button type="button" onclick="addIngredient()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Ingredient</button>
+        <h2 class="text-xl font-bold my-4">Instructions:</h2>
+        <div id="instructionsContainer" class="mb-4">
+            <div class="mb-2">
+                <textarea name="instructions[]" placeholder="Instruction" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addInstruction()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Instruction</button>
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Submit</button>
+    </form>
+</div>
+<script>
+    function addIngredient() {
+        const container = document.getElementById('ingredientsContainer');
+        const row = document.createElement('div');
+        row.className = 'ingredientRow';
+        row.innerHTML = `
+        <div class="flex mb-2">
+                <input type="text" name="ingredients[]" placeholder="Ingredient" class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                <input type="text" name="quantities[]" placeholder="Quantity" class="shadow appearance-none border rounded w-1/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                <input type="text" name="units[]" placeholder="Unit" class="shadow appearance-none border rounded w-1/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+        `;
+        container.appendChild(row);
+    }
+    function validateForm() {
+        // Get form fields
+        var recipeName = document.getElementById('recipe_name');
+        var author = document.getElementById('author');
+        var time = document.getElementById('time');
+
+        // Check if required fields are empty
+        if (recipeName.value.trim() === '') {
+            alert('Recipe Name is required');
+            return false; // Prevent form submission
+        }
+        if (author.value.trim() === '') {
+            alert('Author is required');
+            return false; // Prevent form submission
+        }
+        if (time.value.trim() === '') {
+            alert('Time is required');
+            return false; // Prevent form submission
+        }
+
+        // If all validations pass, allow form submission
+        return true;
+    }
+    function addInstruction() {
+        const container = document.getElementById('instructionsContainer');
+        const row = document.createElement('div');
+        row.className = 'instructionRow';
+        row.innerHTML = `
+            <textarea name="instructions[]" placeholder="Instruction" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+        `;
+        container.appendChild(row);
+    }
+</script>
+{% endblock %}
+

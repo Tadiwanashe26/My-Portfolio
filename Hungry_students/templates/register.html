@@ -1,0 +1,60 @@
+<html lan="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+</head>
+
+<body class="bg-cover pb-20" style="background-image: url('/static/img/HungryStudent.png')">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="flash-messages" class="space-y-2">
+      {% for category, message in messages %}
+        <div class="{% if category == 'success' %}bg-green-100 border-green-400 text-center text-green-700{% endif %}
+                    {% if category == 'error' %}bg-red-100 border-red-400 text-center text-red-700{% endif %}
+                    p-4 border-2 rounded-lg">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+    <div class="flex justify-end pt-12 pr-12">
+        <a href="/login" class="btn">Sign in</a>
+      </div>
+    <div class="flex justify-center pt-12">
+    <span class="font-bold font-custom block text-6xl md:text-8xl">Hungry Student</span>
+    </div>
+    <div class="flex justify-center">
+        <img src="/static/img/brg.png" class="size-45 md:size-64">
+    </div>
+
+<div class="flex justify-center pt-6">
+<form action="/register" method="POST" class="w-full max-w-sm">
+  {{ form.hidden_tag() }}
+    <div class="mb-6">
+        <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email address</label>
+        <input type="email" name="email" class="txtinput" autocomplete="off" placeholder="johndoe@example.com" required>
+    </div>
+    <div class="mb-6">
+            <label for="password" class="block text-sm font-semibold leading-6 text-gray-900">Password</label>
+            <input type="password" name="password" class="txtinput" autocomplete="off" required placeholder="password">
+    </div>
+    <div class="mb-6">
+        <label for="confirm" class="block text-sm font-semibold leading-6 text-gray-900">Repeat Password</label>
+        <input type="password" name="confirm" class="txtinput" autocomplete="off" required placeholder="confirm password">
+    </div>
+    <button type="submit" class="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full">
+        <span>Register new account</span>
+    </button>
+</form>
+</div>
+<footer class="w-screen h-20 bg-gray-400 text-white fixed bottom-0 overflow-hidden">
+  <p id="fun-fact" class="bg-gray-400 text-white font-bold px-4 py-2 rounded-md text-center"></p>
+</footer>
+
+<script src="/static/funfact.js"></script>
+</body>
+</html>

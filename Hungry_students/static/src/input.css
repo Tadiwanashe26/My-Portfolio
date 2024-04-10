@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components {
+    .btn{
+      @apply py-2 px-5 bg-orange-100 font-semibold rounded-full shadow-md hover:bg-gray-200 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+    }
+    .txtinput{
+      @apply mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-8 md:h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200;
+    }
+
+     .card{
+      @apply pb-2 bg-white rounded overflow-hidden cursor-pointer shadow-xl relative flex flex-col justify-between mt-4;
+     }
+     .badge{
+    @apply bg-gray-100 text-xs text-gray-500 uppercase font-bold rounded-full p-2 absolute top-0 ml-2 mt-2
+     }
+}
+
+@keyframes slide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block title%}
+Home Page
+{% endblock %}
+{% block content%}
+<div class="px-16 py-6">
+<h2 class="text-gray-700 text-6xl font-semibold font-custom" >Easy Recipes</h2>
+<h3 class="text-3xl font-semibold font-custom">for Hungry Students</h3>
+<div>
+
+    <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">Latest Recipes</h4>
+    <div class="recipe-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="latest-recipe-container">
+    </div>
+
+    <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">All Recipes</h4>
+    <div class="recipe-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="all-recipe-container">
+    </div>
+
+</div>
+<script src="/static/index.js"></script>
+<script src="/static/recipeloader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+{% endblock %}

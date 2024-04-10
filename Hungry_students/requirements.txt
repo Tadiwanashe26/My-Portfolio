@@ -1,0 +1,15 @@
+pytz
+requests
+tailwindcss
+sqlite3
+flask
+cs50 
+flask_session 
+werkzeug.security 
+flask_wtf 
+flask_login 
+flask_wtf.csrf 
+wtforms 
+wtforms.validators 
+werkzeug.utils 
+

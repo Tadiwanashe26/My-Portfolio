@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} Layout {% endblock %}</title>
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+</head>
+<body class="pb-20">
+<nav class=" block md:contents">
+  <div class=" bg-gray-200 flex items-center font-medium justify-around">
+    <div>
+      <img src="/static/img/burgerico.png" alt="burger logo">
+    </div>
+    <ul class="md:flex sm:block hidden uppercase items-center gap-8 font-custom cursor-pointer">
+      <li class="py-7 px-3 inline-block ">
+        <a href="/">Home</a>
+      </li>
+      <li class="py-7 px-3 inline-block">
+        <a href="/submit_recipe">Submit your Recipe</a>
+      </li>
+      <li href="/" class="py-7 px-3 inline-block">
+        <a href="/my_recipe">My Recipes</a>
+      </li>
+      <li href="/" class="py-7 px-3 inline-block">
+        <a href="/about">About</a>
+      </li>
+  </ul>
+  <div class="uppercase md:block hidden">
+    <a href="/login" class="ml-3 btn">Sign In</a>
+    <a href="/register" class="ml-3 btn">Register</a>
+  </div>
+</div>
+</nav>
+
+<main>
+  {% block content%}{% endblock %}
+</main>
+
+  <!--mobile-->
+  <div class="md:hidden">
+    <!-- Burger Icon -->
+    <div class="burger-icon absolute top-3 right-2 " onclick="toggleNavbar()">
+      <div>
+        <ion-icon name='menu' class="w-6 h-6"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav id="navbar" class="hidden md:hidden pb-2 bg-gray-200 absolute w-full h-full bottom-0 py-24 pl-4 transition-transform duration-2000 ease-in-out">
+      <div class="close-icon absolute top-3 right-2" onclick="toggleNavbar()">
+        <ion-icon name="close" class="w-6 h-6"></ion-icon>
+      </div>
+      <div class="block md:hidden">
+        <img src="/static/img/burgerico.png" alt="burger logo" class="absolute top-0 pb-2">
+      </div>
+
+      <div class="uppercase pt-10 pb-4">
+        <a href="/login" class="pt-3 btn">Sign In</a>
+        <a href="/register" class="pt-3 mr-3 btn">Register</a>
+      </div>
+
+      <div class="font-medium pt-5">
+        <ul class="cursor-pointer">
+          <li href="/" class="py-2 px-3 flex items-center">
+            <ion-icon name="storefront" class="mr-2"></ion-icon>
+            <a href="/">Home</a>
+          </li>
+          <li href="/submit_recipe" class="py-2 px-3 flex items-center md:cursor-pointer">
+            <ion-icon name="arrow-up-circle" class="mr-2"></ion-icon>
+            <a href="/submit_recipe">Submit your Recipe</a>
+          </li>
+          <li href="/" class="py-2 px-3 flex items-center md:cusor-pointer">
+            <ion-icon name="fast-food" class="mr-2"></ion-icon>
+            <a href="/my_recipe">My Recipes</a>
+          </li>
+          <li href="/" class="py-2 px-3 flex items-center md:cusor-pointer">
+            <ion-icon name="information-circle" class="text-2xl mr-2"></ion-icon>
+            <a href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <footer id="footer" class=" fixed bottom-0 w-full bg-gray-400 text-white py-4">
+    <div class="text-sm container mx-auto flex justify-center items-center pb-2">
+        <p>&copy; 2024 Hungry Students. All rights reserved. | Budget-Friendly, easy Recipes for Students</p>
+    </div>
+    <a href="/logout" class="btn text-black ">Sign out</a>
+  </footer>
+
+  <script src="/static/index.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
