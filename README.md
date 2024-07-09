@@ -9,7 +9,7 @@
 - 🚀 Always Learning and Exploring
 Projects
 ### Here are some of the projects I've worked on:
-
+1
 #### Project 1: A directory cleaner to organise files.
 
 ## Skills
